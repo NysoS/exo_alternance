@@ -4,11 +4,21 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+
+    private $userPasswordHasherInterface;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasherInterface)
+    {
+        $this->userPasswordHasherInterface = $userPasswordHasherInterface;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $categShoes = new Category();
@@ -74,6 +84,16 @@ class AppFixtures extends Fixture
         $ts3->setSize(['XS','S','M','M-T','L','XL','XXL']);
         $ts3->setCategory($categTShirt);
         $manager->persist($ts3);
+
+        $user = new User();
+        $user->setEmail('test@me.fr');
+        $user->setPassword(
+            $this->userPasswordHasherInterface->hashPassword(
+                $user,
+                '123456'
+            )
+        );
+        $manager->persist($user);
 
         $manager->flush();
     }
