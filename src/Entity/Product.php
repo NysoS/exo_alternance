@@ -4,14 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\DiscriminatorColumn;
-use Doctrine\ORM\Mapping\DiscriminatorMap;
-use Doctrine\ORM\Mapping\InheritanceType;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[InheritanceType('JOINED')]
-#[DiscriminatorColumn(name:'type', type:'string')]
-#[DiscriminatorMap(['shoes'=>'Shoes','tshirt'=>'TShirt'])]
 class Product
 {
     #[ORM\Id]
@@ -28,9 +22,14 @@ class Product
     #[ORM\Column(type: 'array', nullable: true)]
     private $keyWord = [];
 
+    #[ORM\Column(type: 'string')]
+    private $size;
+
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinColumn(name:'category', referencedColumnName:'idCateg')]
     private $category;
+
+    
 
     public function getId(): ?int
     {
@@ -70,6 +69,18 @@ class Product
     {
         $this->keyWord = $keyWord;
 
+        return $this;
+    }
+
+    public function getSize(): string
+    {
+        return $this->size;
+    }
+
+    public function setSize(string $size): self
+    {
+        $this->size = $size;
+        
         return $this;
     }
 
