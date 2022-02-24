@@ -32,8 +32,6 @@ class Product
     #[ORM\Column(type: 'text', nullable: true)]
     private $descProduct;
 
-    
-
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    
+    <div class="container">
+        <h1>Add product</h1>
+
+        <div id="formProduct">
+            {{form_start(productForm, {'attr': {'id': 'formP'}})}}
+                {{form_widget(productForm)}}
+
+                <div id="sizes"></div>
+
+                <input type="submit">
+            {{form_end(productForm)}}
+        </div>
+
+    </div>
+    
+    <script src="{{asset('js/ProductForm.js')}}"></script>
+
+</div>
+{% endblock %}
