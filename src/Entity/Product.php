@@ -19,15 +19,18 @@ class Product
     #[ORM\Column(type: 'float')]
     private $priceProduct;
 
-    #[ORM\Column(type: 'array', nullable: true)]
+    #[ORM\Column(type: 'json', nullable: true)]
     private $keyWord = [];
 
-    #[ORM\Column(type: 'string')]
-    private $size;
+    #[ORM\Column(type: 'json')]
+    private $sizes = [];
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinColumn(name:'category', referencedColumnName:'idCateg')]
     private $category;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $descProduct;
 
     
 
@@ -72,14 +75,14 @@ class Product
         return $this;
     }
 
-    public function getSize(): string
+    public function getSize(): array
     {
-        return $this->size;
+        return $this->sizes;
     }
 
-    public function setSize(string $size): self
+    public function setSize(array $sizes): self
     {
-        $this->size = $size;
+        $this->sizes = $sizes;
         
         return $this;
     }
@@ -92,6 +95,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDescProduct(): ?string
+    {
+        return $this->descProduct;
+    }
+
+    public function setDescProduct(?string $descProduct): self
+    {
+        $this->descProduct = $descProduct;
 
         return $this;
     }
