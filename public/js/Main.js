@@ -3,6 +3,7 @@ const tshirtSizes = ['XS','S','M','M-T','L','XL','XXL']; //taille pour la catego
 
 let sizeInput = document.getElementById('size-input');
 const sizeFilter = [];
+loadData(sizeInput);
 
 const categOptions = document.querySelectorAll('.categ-filter-opt');
 categOptions.forEach(elt =>{
@@ -33,6 +34,7 @@ function displaySize(categ){
 }
 
 function createSizeElt(key,value){
+    
     let btnGroup = document.createElement('div');
     btnGroup.setAttribute('class','btn-group size-btn');
     btnGroup.setAttribute('role','group');
@@ -53,13 +55,28 @@ function createSizeElt(key,value){
             sizeInput.value = JSON.parse(JSON.stringify(sizeFilter));
         }
     })
-    btnGroup.appendChild(input);
 
     let label = document.createElement('label');
     label.setAttribute('class','btn btn-outline-primary');
     label.setAttribute('for','btncheck'+key);
     label.innerText = value; 
+
+    sizeFilter.forEach(s=>{
+        if(s==value){
+            input.checked = true;
+        }
+    })
+
+   
+
+    btnGroup.appendChild(input);
     btnGroup.appendChild(label);
 
     return btnGroup;
+}
+
+function loadData(input){
+    input.value.split(',').forEach(elt=>{
+        sizeFilter.push(elt);
+    })
 }

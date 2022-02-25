@@ -17,7 +17,7 @@ class MainController extends AbstractController
         $memory = [];
         $filters = [];
         $categs = $categoryRepository->findAll();
-        $products = null;
+        $size = null;
 
         if($request->getMethod() == 'POST'){
 
@@ -27,13 +27,14 @@ class MainController extends AbstractController
                 $memory['categ'] = $categFilter->getId();
                 
             }
-            $size = null;
+            
             if(!empty($request->get('sizes'))){
                 $size = explode(",",$request->get('sizes'));
+                $memory['sizes'] = $request->get('sizes');
             }
-            $products = $productRepository->findByFilter($filters,$size);
            
         }
+        $products = $productRepository->findByFilter($filters,$size);
    
         return $this->render('main/index.html.twig', [
             'categs' => $categs,
