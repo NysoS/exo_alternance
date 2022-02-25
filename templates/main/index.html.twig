@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div id="home" class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <form class="filter mt-3" method="Post" action="{{ path('main') }}">
+                <div class="filter-categ">
+                    <h3>Category</h3>
+                    <div class="filter-categ-content">
+                        <select class="form-select" name="categ" id="categ">
+                        <option value="all" data-name="all" class="categ-filter-opt">All</option>
+                        {% for categ in categs %}
+                            <option value="{{categ.id}}" data-name="{{categ.nameCateg}}" class="categ-filter-opt" {% if memory["categ"] is defined %}{% if memory['categ'] == categ.id %}selected{% endif %}{% endif %}>{{categ.nameCateg}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div id="size-section" class="filter-size mt-2" hidden>
+                    <h3>Sizes</h3>
+                    <div id="filter-size-content" class="filter-size-content">
+                    </div>
+                    <input type="text" name="sizes" id="size-input" hidden>
+                </div>
+                <input class="btn btn-primary mt-3" type="submit" value="Apply filters">
+            </form>
+        </div>
+        <div class="col">
+            <div class="products">
+                {% for product in products %}
+                    <div class="product">
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top product-img" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.nameProduct}}</h5>
+                                <p class="card-text">{{product.descProduct}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <h3 class="price">{{product.priceProduct}}€</h3>
+                            </div>
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="{{asset('js/Main.js')}}"></script>
+{% endblock %}
