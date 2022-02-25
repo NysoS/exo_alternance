@@ -1,0 +1,28 @@
+#sizes{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.size-cb{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2.5px;
+    margin-left: 2.5px;
+    border: 1px solid;
+}
+
+.size-cb:hover, .size-cb-lbl:hover{
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
+}
+
+.size-selected{
+    background-color: rgb(190, 190, 190);
+    
+}

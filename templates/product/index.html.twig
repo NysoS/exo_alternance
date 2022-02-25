@@ -19,7 +19,9 @@
 
                 <div id="sizes"></div>
 
-                <input type="submit">
+                <input type="text" name="size" id="sizeInput" hidden value="[]" {% if sizes is defined %} data-size="{{sizes}}" {% endif %}>
+
+                <input class="btn btn-primary" type="submit">
             {{form_end(productForm)}}
         </div>
 
