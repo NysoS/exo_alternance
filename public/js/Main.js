@@ -1,10 +1,11 @@
 const shoesSizes = ['38','39','40','41','42','43','44','45','46']; //Taille pour la categorie chaussure 'Shoes'
 const tshirtSizes = ['XS','S','M','M-T','L','XL','XXL']; //taille pour la categorie T-shirt
 
+//Recuperation de l'input pour les tailles
 let sizeInput = document.getElementById('size-input');
 const sizeFilter = [];
-loadData(sizeInput);
 
+//Recuperation des differents category
 const categOptions = document.querySelectorAll('.categ-filter-opt');
 categOptions.forEach(elt =>{
    if(elt.getAttribute('selected')!=null){
@@ -12,6 +13,7 @@ categOptions.forEach(elt =>{
    }
 })
 
+//On affiche les différents tailles selon la categorie choisie
 function displaySize(categ){
     let sectionSize = document.getElementById('size-section');
     sectionSize.hidden = false;
@@ -19,11 +21,12 @@ function displaySize(categ){
     divSize.innerHTML = "";
 
     if(categ == 'Shoes'){
+        loadData(sizeInput); 
         shoesSizes.forEach((elt,key) =>{
            divSize.appendChild(createSizeElt(key,elt));
         });
     }else if(categ == 'T-shirt'){
-        sectionSize.removeAttribute('hidden');
+        loadData(sizeInput); 
         tshirtSizes.forEach((elt,key)=>{
             divSize.appendChild(createSizeElt(key,elt));
         });
@@ -33,6 +36,7 @@ function displaySize(categ){
     
 }
 
+//Creation des elements des tailles
 function createSizeElt(key,value){
     
     let btnGroup = document.createElement('div');
@@ -67,16 +71,17 @@ function createSizeElt(key,value){
         }
     })
 
-   
-
     btnGroup.appendChild(input);
     btnGroup.appendChild(label);
 
     return btnGroup;
 }
 
+//Chargement des tailles, si il y à déjà une recherche
 function loadData(input){
-    input.value.split(',').forEach(elt=>{
-        sizeFilter.push(elt);
-    })
+    if(input!=null){
+        input.value.split(',').forEach(elt=>{
+            sizeFilter.push(elt);
+        })
+    }
 }
