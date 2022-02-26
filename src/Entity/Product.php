@@ -2,37 +2,52 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ApiResource(
+    normalizationContext:['groups' => ['product:get']],
+    collectionOperations: ['get'],
+    itemOperations: ['get']
+)]
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer', name:'idProduct')]
+    #[Groups('product:get')]
     private $id;
 
     #[ORM\Column(type: 'string', length: 50)]
+    #[Groups('product:get')]
     private $nameProduct;
 
     #[ORM\Column(type: 'float')]
+    #[Groups('product:get')]
     private $priceProduct;
 
     #[ORM\Column(type: 'json', nullable: true)]
+    #[Groups('product:get')]
     private $keyWord = [];
 
     #[ORM\Column(type: 'json')]
+    #[Groups('product:get')]
     private $sizes = [];
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
     #[ORM\JoinColumn(name:'category', referencedColumnName:'idCateg')]
+    #[Groups('product:get')]
     private $category;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups('product:get')]
     private $descProduct;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('product:get')]
     private $imgProduct;
 
     public function getId(): ?int
