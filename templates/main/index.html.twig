@@ -45,7 +45,7 @@
                 {% for product in products %}
                     <div class="product">
                         <div class="card">
-                            <img src="https://via.placeholder.com/150" class="card-img-top product-img" alt="...">
+                        <img src="{% if product.imgProduct is null %}{{asset('uploads/no_img.png')}}{% else %}{{ asset("uploads/products/")~ product.imgProduct }}{% endif %}" class="card-img-top product-img" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{product.nameProduct}}</h5>
                                 <p class="card-text">{{product.descProduct}}</p>
@@ -58,6 +58,13 @@
                 {% endfor %}
             </div>
         </div>
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <div class="col-2">
+                <div class="mt-5">
+                    <a href="{{path('addProduct')}}" class="btn btn-outline-primary">Add product</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
 </div>

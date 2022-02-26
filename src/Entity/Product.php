@@ -32,6 +32,9 @@ class Product
     #[ORM\Column(type: 'text', nullable: true)]
     private $descProduct;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $imgProduct;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Product
     public function setDescProduct(?string $descProduct): self
     {
         $this->descProduct = $descProduct;
+
+        return $this;
+    }
+
+    public function getImgProduct(): ?string
+    {
+        return $this->imgProduct;
+    }
+
+    public function setImgProduct(?string $imgProduct): self
+    {
+        $this->imgProduct = $imgProduct;
 
         return $this;
     }

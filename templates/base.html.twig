@@ -30,12 +30,21 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
-                <a href="" class="ms-3 me-3">
-                    <div class="nav-login">
-                        <i style="font-size:35px" class="fa-solid fa-user-astronaut"></i>
-                        <p>Login</p>
-                    </div>
-                </a>
+                {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+                    <a href="{{path('app_login')}}" class="ms-3 me-3">
+                        <div class="nav-login">
+                            <i style="font-size:35px" class="fa-solid fa-user-astronaut"></i>
+                            <p>Login</p>  
+                        </div>
+                    </a>
+                {% else %}
+                    <a href="{{path('app_logout')}}" class="ms-3 me-3">
+                        <div class="nav-login">
+                            <i style="font-size:35px" class="fa-solid fa-user-astronaut"></i>
+                            <p>Logout</p>
+                        </div>
+                    </a>
+                {% endif %}
             </div>
         </nav>
         {% block body %}{% endblock %}
