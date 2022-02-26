@@ -10,6 +10,34 @@ a{
     text-decoration: none;
 }
 
+
+.log-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.log-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.regiser-btn{
+    display: flex;
+    justify-content: space-around;
+}
+
 .nav-login{
     display: flex;
     align-items: center;
