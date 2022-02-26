@@ -29,7 +29,15 @@
                     </div>
                     <input type="text" name="sizes" id="size-input" hidden value="{% if memory['sizes'] is defined %}{{memory['sizes']}}{% endif %}">
                 </div>
+                <div class="filter-price mt-2">
+                    <h3>Price</h3>
+                    <div class="filter-price-content">
+                        <input type="number" step="0.01" min="0" class="form-control" name="minPrice" placeholder="EUR min" value="{% if memory['minPrice'] is defined %}{{memory['minPrice']}}{% endif %}">
+                        <input type="number" step="0.01" min="0" class="form-control mt-2" name="maxPrice" placeholder="EUR max" value="{% if memory['maxPrice'] is defined %}{{memory['maxPrice']}}{% endif %}">
+                    </div>
+                </div>
                 <input class="btn btn-primary mt-3" type="submit" value="Apply filters">
+                <a href="{{path('main')}}" class="btn btn-outline-primary mt-3">Reset filters</a>
             </form>
         </div>
         <div class="col">
@@ -46,7 +54,6 @@
                                 <h3 class="price">{{product.priceProduct}}€</h3>
                             </div>
                         </div>
-                        
                     </div>
                 {% endfor %}
             </div>

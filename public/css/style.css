@@ -61,6 +61,11 @@ a{
     margin: 2px;
 }
 
+.filter .filter-price .filter-price-content{
+    display: flex;
+    flex-direction: column;
+}
+
 .products{
     display: flex;
     flex-wrap: wrap;

@@ -16,12 +16,32 @@ class MainController extends AbstractController
     {
         $memory = [];
         $filters = [];
+        $search = [];
         $categs = $categoryRepository->findAll();
         $size = null;
+        $prices = [];
 
         if($request->getMethod() == 'POST'){
 
-            $categFilter = $categoryRepository->findOneBy($request->get('categ')!=null?['id'=>$request->get('categ')]:[]);
+            if(!empty($request->get("search"))){
+                $search = explode(" ",$request->get("search"));
+                $memory['search'] = $request->get('search');
+            }
+            
+            $categFilter = null;
+            if($request->get('categ')!=null){
+                $categFilter = $categoryRepository->findOneBy(['id'=>$request->get('categ')]);
+            }
+
+           
+            if($request->get('minPrice') != null){
+                $prices[0] = $request->get('minPrice');
+                $memory['minPrice'] = $request->get('minPrice');
+            }
+            if($request->get('maxPrice') != null){
+                $prices[1] = $request->get('maxPrice');
+                $memory['maxPrice'] = $request->get('maxPrice');
+            }
 
             if($categFilter != null){
                 $filters['category'] = $categFilter;
@@ -32,9 +52,10 @@ class MainController extends AbstractController
                     $memory['sizes'] = $request->get('sizes');
                 }
             }
+            
         }
       
-        $products = $productRepository->findByFilter($filters,$size);
+        $products = $productRepository->findByFilter($filters,$prices,$size,$search);
    
         return $this->render('main/index.html.twig', [
             'categs' => $categs,
