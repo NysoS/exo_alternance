@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+
+<div id="desc-product" class="container">
+
+    <div class="card-product">
+        <div class="card mb-3" style="max-width: 900px;">
+            <div class="row g-0">
+                <div class="col">
+                    <img width="545px" src="{% if product.imgProduct is null %}{{asset('uploads/no_img.jpg')}}{% else %}{{ asset("uploads/products/")~ product.imgProduct }}{% endif %}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.nameProduct}}</h5>
+                        <p class="card-text">{{product.descProduct}}</p>
+                        <h6 class="card-title mt-3">Sizes</h6>
+                        <div class="sizes-product">
+                            {% for size in product.size %}
+                                <div class="size-box">
+                                    {{size}}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <h6 class="card-title mt-3">Price</h6>
+                        <h3 class="card-text price-product ms-4">{{product.priceProduct}}€</h3>
+                        <div class="btn">
+                            <a href="{{path('main')}}" class="btn btn-outline-secondary">Back</a>
+                            <button class="btn btn-primary"><i class="fa-solid fa-cart-shopping me-1"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

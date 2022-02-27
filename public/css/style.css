@@ -114,6 +114,10 @@ a{
     border-radius: 15px;
 }
 
+.products .product .card .card-body{
+    color: black;
+}
+
 .products .product .card-footer{
     border-top: 0px;
     background-color: white;
@@ -124,4 +128,39 @@ a{
 .products .product .product-img{
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
+}
+
+#desc-product{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.card-product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.card-product .card-body .sizes-product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-product .card-body .sizes-product .size-box{
+   width: 35px;
+   height: 35px;
+   background-color: rgb(231, 231, 231);
+   border: solid 1px;
+   margin: 5px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.card-product .card-body .price-product{
+    color: var(--primary);
 }

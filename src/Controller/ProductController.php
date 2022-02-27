@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\ProductRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +43,18 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'productForm' => $form->createView(),
             'sizes'=>$sizes
+        ]);
+    }
+
+    #[Route('/product/{id}', name:"getProduct")]
+    public function getProductById(Request $request, ProductRepository $productRepository)
+    {
+
+        $requestParam = $request->get('id');
+        $product = $productRepository->findOneBy(['id'=>$requestParam]);
+
+        return $this->render('product/desc.html.twig', [
+            'product'=>$product
         ]);
     }
 }

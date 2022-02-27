@@ -22,7 +22,7 @@
                 <input type="text" name="size" id="sizeInput" hidden value="[]" {% if sizes is defined %} data-size="{{sizes}}" {% endif %}>
 
                 <input class="btn btn-primary" type="submit" value="Add product">
-                <a href="{{path('main')}}" class="btn btn-outline-dark">Back</a>
+                <a href="{{path('main')}}" class="btn btn-outline-secondary">Back</a>
             {{form_end(productForm)}}
         </div>
 

@@ -43,9 +43,9 @@
         <div class="col">
             <div class="products">
                 {% for product in products %}
-                    <div class="product">
+                    <a href="{{path('getProduct',{id:product.id} )}}" class="product">
                         <div class="card">
-                        <img src="{% if product.imgProduct is null %}{{asset('uploads/no_img.png')}}{% else %}{{ asset("uploads/products/")~ product.imgProduct }}{% endif %}" class="card-img-top product-img" alt="...">
+                        <img src="{% if product.imgProduct is null %}{{asset('uploads/no_img.jpg')}}{% else %}{{ asset("uploads/products/")~ product.imgProduct }}{% endif %}" class="card-img-top product-img" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{product.nameProduct}}</h5>
                                 <p class="card-text">{{product.descProduct}}</p>
@@ -54,7 +54,7 @@
                                 <h3 class="price">{{product.priceProduct}}€</h3>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>
